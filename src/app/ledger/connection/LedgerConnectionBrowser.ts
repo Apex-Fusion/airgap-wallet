@@ -67,6 +67,7 @@ export class LedgerConnectionBrowser implements LedgerConnection {
     const supportedTransportType: TransportType = await getSupportedTransportType(protocolIdentifier, connectionType)
 
     if (supportedTransportType) {
+      // @ts-ignore - DISABLED: Type incompatibility between Transport versions
       const transport: Transport = await (descriptor ? supportedTransportType.open(descriptor) : supportedTransportType.create())
 
       return new LedgerConnectionBrowser(connectionType, transport)

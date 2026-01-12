@@ -37,6 +37,14 @@
             glibc zlib ncurses5 stdenv.cc.cc.lib
           ];
           profile = ''
+            # Source .env file if it exists (for GITHUB_TOKEN, etc.)
+            if [ -f .env ]; then
+              set -a
+              source .env
+              set +a
+              echo "✅ Loaded .env file"
+            fi
+
             # Stop any existing Gradle daemons that might be running outside the FHS environment
             ./gradlew --stop 2>/dev/null || true
 
