@@ -303,6 +303,7 @@ export class BeaconService {
   }
 
   public async getProtocolBasedOnBeaconNetwork(network: Network): Promise<ICoinProtocolAdapter<TezosProtocol>> {
+    // @ts-ignore - DISABLED: Missing limanet/mumbainet network configs
     const configs: {
       [key in Exclude<
         BeaconNetworkType,
