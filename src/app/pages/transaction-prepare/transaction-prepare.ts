@@ -124,6 +124,14 @@ export class TransactionPreparePage {
       this.addressIndex
     )
 
+    // DEBUG: Check wallet's market price state
+    console.log('[DEBUG] transaction-prepare wallet:', {
+      protocolId: wallet.protocol.identifier,
+      currentMarketPrice: wallet.getCurrentMarketPrice()?.toString(),
+      currentBalance: wallet.getCurrentBalance()?.toString(),
+      walletInstance: wallet
+    })
+
     const forced = this.route.snapshot.params.forceMigration
     const forceMigration: boolean = forced === 'forced' || false
 
@@ -417,7 +425,13 @@ export class TransactionPreparePage {
     } else if (wallet.protocol.identifier.startsWith(SubProtocolSymbols.ETH_ERC20)) {
       return this.priceService.getCurrentMarketPrice(await createV0EthereumProtocol(), 'USD').then((price: BigNumber) => price.toNumber())
     } else {
-      return wallet.getCurrentMarketPrice(this.collectibleID)?.toNumber() ?? 0
+      const price = wallet.getCurrentMarketPrice(this.collectibleID)
+      console.log('[DEBUG] calculateFeeCurrentMarketPrice:', {
+        protocolId: wallet.protocol.identifier,
+        currentMarketPrice: price?.toString(),
+        collectibleID: this.collectibleID
+      })
+      return price?.toNumber() ?? 0
     }
   }
 
