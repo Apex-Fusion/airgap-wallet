@@ -28,6 +28,7 @@
           name = "android";
           targetPkgs = pkgs: with pkgs; [
             nodejs_20
+            bun
             yarn
             jdk17
             git
