@@ -122,6 +122,7 @@ export class PriceService implements AirGapWalletPriceService {
   public async fetchFromCoinGecko(protocol: ICoinProtocol): Promise<BigNumber> {
     return new Promise(async (resolve, reject) => {
       const symbolMapping = {
+        ada: 'cardano',
         zrx: '0x',
         elf: 'aelf',
         aion: 'aion',
