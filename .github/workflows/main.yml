@@ -4,7 +4,7 @@ on: push
 
 jobs:
   build_angular:
-    runs-on: ubuntu-latest
+    runs-on: nixos
 
     steps:
       - uses: actions/checkout@v2
@@ -41,7 +41,7 @@ jobs:
   deploy_github_pages:
     needs: build_angular
     if: github.ref == 'refs/heads/feat/github-actions'
-    runs-on: ubuntu-latest
+    runs-on: nixos
 
     steps:
       - uses: actions/checkout@v2
